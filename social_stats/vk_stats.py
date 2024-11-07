@@ -1,5 +1,6 @@
 import requests
 import datetime
+import config as conf
 
 class VKStats:
     def __init__(self, vk_api_key, group_id):
@@ -42,3 +43,7 @@ class VKStats:
             raise Exception(response['error']['error_msg'])
         else:
             return response['response']['count']
+
+if __name__ == "__main__":
+      followers = VKStats(conf.vk_api_key, conf.vk_group_id).get_followers()
+      print(followers)

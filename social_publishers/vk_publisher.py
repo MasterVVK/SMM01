@@ -39,7 +39,7 @@ class VKPublisher:
 
             return f'photo{owner_id}_{photo_id}'
 
-    def publish_post(self, content, image_url=None):
+    def publish_post(self, content, image_url=None, timestamp=None):
         params = {
             'access_token': self.vk_api_key,
             'from_group': 1,
@@ -50,6 +50,9 @@ class VKPublisher:
         if image_url:
             attachment = self.upload_photo(image_url)
             params['attachments'] = attachment
+
+        if timestamp:
+            params['publish_date'] = timestamp
 
         response = requests.post('https://api.vk.com/method/wall.post', params=params).json()
         return response
